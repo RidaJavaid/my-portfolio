@@ -1,6 +1,8 @@
 "use client";
 
+import { FormEvent, useState } from "react";
 import { motion } from "framer-motion";
+
 import {
   FaEnvelope,
   FaPhoneAlt,
@@ -10,22 +12,64 @@ import {
 } from "react-icons/fa";
 
 export default function Contact() {
+  const [isSending, setIsSending] = useState(false);
+  const [status, setStatus] = useState("");
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setIsSending(true);
+    setStatus("");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      subject: formData.get("subject"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to send message.");
+      }
+
+      setStatus("Message sent successfully!");
+      form.reset();
+    } catch (error) {
+      console.error("Contact form error:", error);
+      setStatus("Failed to send message. Please try again.");
+    } finally {
+      setIsSending(false);
+    }
+  };
+
   return (
     <section
       id="contact"
       className="relative py-28 px-6 overflow-hidden"
     >
-      {/* Background Glow */}
       <div className="absolute -top-24 left-0 h-72 w-72 rounded-full bg-cyan-500/20 blur-[120px]" />
+
       <div className="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-blue-500/20 blur-[120px]" />
 
       <div className="relative z-10 max-w-7xl mx-auto">
-
-        {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: .6 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
           className="text-center mb-20"
         >
@@ -34,28 +78,24 @@ export default function Contact() {
           </p>
 
           <h2 className="text-5xl md:text-6xl font-bold mt-4">
-            Let's Work Together
+            Let&apos;s Work Together
           </h2>
 
           <p className="mt-6 text-gray-400 max-w-3xl mx-auto leading-8">
             Whether you have an internship opportunity, freelance project,
-            collaboration idea, or simply want to connect, I'd love to hear
+            collaboration idea, or simply want to connect, I&apos;d love to hear
             from you.
           </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-10">
-
-          {/* LEFT SIDE */}
           <motion.div
             initial={{ opacity: 0, x: -60 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: .6 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
             className="space-y-6"
           >
-
-            {/* Email */}
             <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 hover:border-cyan-400 transition">
               <div className="flex items-center gap-5">
                 <div className="w-14 h-14 rounded-2xl bg-cyan-500/20 flex items-center justify-center">
@@ -75,7 +115,6 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Phone */}
             <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 hover:border-cyan-400 transition">
               <div className="flex items-center gap-5">
                 <div className="w-14 h-14 rounded-2xl bg-cyan-500/20 flex items-center justify-center">
@@ -95,7 +134,6 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Location */}
             <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 hover:border-cyan-400 transition">
               <div className="flex items-center gap-5">
                 <div className="w-14 h-14 rounded-2xl bg-cyan-500/20 flex items-center justify-center">
@@ -109,7 +147,6 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* LinkedIn */}
             <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 hover:border-cyan-400 transition">
               <div className="flex items-center gap-5">
                 <div className="w-14 h-14 rounded-2xl bg-cyan-500/20 flex items-center justify-center">
@@ -130,36 +167,19 @@ export default function Contact() {
                 </div>
               </div>
             </div>
-
           </motion.div>
 
-          {/* RIGHT SIDE */}
           <motion.div
             initial={{ opacity: 0, x: 60 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: .6 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
             className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8"
           >
-
             <form
-              action="https://formsubmit.co/ridajavaid.2704@gmail.com"
-              method="POST"
+              onSubmit={handleSubmit}
               className="space-y-6"
             >
-              <input type="hidden" name="_captcha" value="false" />
-              <input
-                type="hidden"
-                name="_subject"
-                value="New Portfolio Contact Message"
-              />
-              <input
-                type="hidden"
-                name="_template"
-                value="table"
-              />
-
-                            {/* Full Name */}
               <div>
                 <label className="block mb-2 text-sm font-medium">
                   Full Name
@@ -174,7 +194,6 @@ export default function Contact() {
                 />
               </div>
 
-              {/* Email */}
               <div>
                 <label className="block mb-2 text-sm font-medium">
                   Email Address
@@ -189,7 +208,6 @@ export default function Contact() {
                 />
               </div>
 
-              {/* Subject */}
               <div>
                 <label className="block mb-2 text-sm font-medium">
                   Subject
@@ -204,7 +222,6 @@ export default function Contact() {
                 />
               </div>
 
-              {/* Message */}
               <div>
                 <label className="block mb-2 text-sm font-medium">
                   Message
@@ -221,19 +238,23 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 py-4 font-semibold text-white transition duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-cyan-500/30"
+                disabled={isSending}
+                className="w-full flex items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 py-4 font-semibold text-white transition duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-cyan-500/30 disabled:opacity-50"
               >
                 <FaPaperPlane />
-                Send Message
+
+                {isSending ? "Sending..." : "Send Message"}
               </button>
 
+              {status && (
+                <p className="text-center text-sm">
+                  {status}
+                </p>
+              )}
             </form>
-
           </motion.div>
-
         </div>
 
-        {/* Bottom */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -262,9 +283,7 @@ export default function Contact() {
             Tailwind CSS & Framer Motion.
           </p>
         </motion.div>
-
       </div>
-
     </section>
   );
 }
