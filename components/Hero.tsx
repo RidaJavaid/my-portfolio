@@ -34,8 +34,6 @@ export default function Hero() {
               sequence={[
                 "Software Engineering Student",
                 2000,
-                "Frontend Developer",
-                2000,
                 "Java Programmer",
                 2000,
                 "Future Full Stack Developer",
