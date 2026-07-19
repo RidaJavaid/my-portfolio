@@ -16,15 +16,12 @@ export default function Contact() {
       className="relative py-28 px-6 overflow-hidden"
     >
       {/* Background Glow */}
-
       <div className="absolute -top-24 left-0 h-72 w-72 rounded-full bg-cyan-500/20 blur-[120px]" />
-
       <div className="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-blue-500/20 blur-[120px]" />
 
       <div className="relative z-10 max-w-7xl mx-auto">
 
         {/* Heading */}
-
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -32,7 +29,6 @@ export default function Contact() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-
           <p className="uppercase tracking-[5px] text-cyan-400 font-semibold">
             Contact
           </p>
@@ -46,13 +42,11 @@ export default function Contact() {
             collaboration idea, or simply want to connect, I'd love to hear
             from you.
           </p>
-
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-10">
 
           {/* LEFT SIDE */}
-
           <motion.div
             initial={{ opacity: 0, x: -60 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -62,53 +56,34 @@ export default function Contact() {
           >
 
             {/* Email */}
-
             <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 hover:border-cyan-400 transition">
-
               <div className="flex items-center gap-5">
-
                 <div className="w-14 h-14 rounded-2xl bg-cyan-500/20 flex items-center justify-center">
-
-                  <FaEnvelope className="text-cyan-400 text-xl"/>
-
+                  <FaEnvelope className="text-cyan-400 text-xl" />
                 </div>
 
                 <div>
-
-                  <p className="text-gray-400">
-                    Email
-                  </p>
+                  <p className="text-gray-400">Email</p>
 
                   <a
                     href="mailto:ridajavaid.2704@gmail.com"
-                    className="font-semibold hover:text-cyan-400"
+                    className="font-semibold hover:text-cyan-400 break-all"
                   >
                     ridajavaid.2704@gmail.com
                   </a>
-
                 </div>
-
               </div>
-
             </div>
 
             {/* Phone */}
-
             <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 hover:border-cyan-400 transition">
-
               <div className="flex items-center gap-5">
-
                 <div className="w-14 h-14 rounded-2xl bg-cyan-500/20 flex items-center justify-center">
-
-                  <FaPhoneAlt className="text-cyan-400 text-xl"/>
-
+                  <FaPhoneAlt className="text-cyan-400 text-xl" />
                 </div>
 
                 <div>
-
-                  <p className="text-gray-400">
-                    Phone
-                  </p>
+                  <p className="text-gray-400">Phone</p>
 
                   <a
                     href="tel:+923094503907"
@@ -116,77 +91,49 @@ export default function Contact() {
                   >
                     +92 309 4503907
                   </a>
-
                 </div>
-
               </div>
-
             </div>
 
             {/* Location */}
-
             <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 hover:border-cyan-400 transition">
-
               <div className="flex items-center gap-5">
-
                 <div className="w-14 h-14 rounded-2xl bg-cyan-500/20 flex items-center justify-center">
-
-                  <FaMapMarkerAlt className="text-cyan-400 text-xl"/>
-
+                  <FaMapMarkerAlt className="text-cyan-400 text-xl" />
                 </div>
 
                 <div>
-
-                  <p className="text-gray-400">
-                    Location
-                  </p>
-
-                  <p className="font-semibold">
-                    Lahore, Pakistan
-                  </p>
-
+                  <p className="text-gray-400">Location</p>
+                  <p className="font-semibold">Lahore, Pakistan</p>
                 </div>
-
               </div>
-
             </div>
 
             {/* LinkedIn */}
-
             <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 hover:border-cyan-400 transition">
-
               <div className="flex items-center gap-5">
-
                 <div className="w-14 h-14 rounded-2xl bg-cyan-500/20 flex items-center justify-center">
-
-                  <FaLinkedin className="text-cyan-400 text-xl"/>
-
+                  <FaLinkedin className="text-cyan-400 text-xl" />
                 </div>
 
                 <div>
-
-                  <p className="text-gray-400">
-                    LinkedIn
-                  </p>
+                  <p className="text-gray-400">LinkedIn</p>
 
                   <a
                     href="https://www.linkedin.com/in/rida-javaid-7aa932332/"
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="font-semibold hover:text-cyan-400"
                   >
                     Connect with me
                   </a>
-
                 </div>
-
               </div>
-
             </div>
 
           </motion.div>
 
           {/* RIGHT SIDE */}
-
           <motion.div
             initial={{ opacity: 0, x: 60 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -195,9 +142,24 @@ export default function Contact() {
             className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8"
           >
 
-            <form className="space-y-6">
-                          {/* Full Name */}
+            <form
+              action="https://formsubmit.co/ridajavaid.2704@gmail.com"
+              method="POST"
+              className="space-y-6"
+            >
+              <input type="hidden" name="_captcha" value="false" />
+              <input
+                type="hidden"
+                name="_subject"
+                value="New Portfolio Contact Message"
+              />
+              <input
+                type="hidden"
+                name="_template"
+                value="table"
+              />
 
+                            {/* Full Name */}
               <div>
                 <label className="block mb-2 text-sm font-medium">
                   Full Name
@@ -213,7 +175,6 @@ export default function Contact() {
               </div>
 
               {/* Email */}
-
               <div>
                 <label className="block mb-2 text-sm font-medium">
                   Email Address
@@ -229,7 +190,6 @@ export default function Contact() {
               </div>
 
               {/* Subject */}
-
               <div>
                 <label className="block mb-2 text-sm font-medium">
                   Subject
@@ -245,7 +205,6 @@ export default function Contact() {
               </div>
 
               {/* Message */}
-
               <div>
                 <label className="block mb-2 text-sm font-medium">
                   Message
@@ -259,8 +218,6 @@ export default function Contact() {
                   required
                 />
               </div>
-
-              {/* Button */}
 
               <button
                 type="submit"
@@ -277,7 +234,6 @@ export default function Contact() {
         </div>
 
         {/* Bottom */}
-
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
