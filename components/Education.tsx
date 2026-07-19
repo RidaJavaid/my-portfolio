@@ -28,7 +28,7 @@ const educationData = [
   },
 
   {
-    title: "FSc (Pre-Engineering)",
+    title: "FSc (Pre-Medical)",
     institute: "KIPS College",
     location: "Lahore, Pakistan",
     duration: "2021 - 2023",
